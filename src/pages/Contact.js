@@ -20,7 +20,8 @@ const ContactPage = () => {
       </div>
 
       {/* Contact Form */}
-      <form className="contact-form" action="mailto:workfintech1@gmail.com" method="post" enctype="text/plain">
+      <form className="contact-form" name="contact" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="contact" />
         <input type="text" name="name" placeholder="Your Name" required />
         <input type="email" name="email" placeholder="Your Email" required />
         <textarea name="message" placeholder="Your Message" required></textarea>
@@ -29,7 +30,8 @@ const ContactPage = () => {
 
       {/* Consultation Form */}
       <h3>Schedule a Consultation</h3>
-      <form className="consultation-form" action="mailto:workfintech1@gmail.com" method="post" enctype="text/plain">
+      <form className="consultation-form" name="consultation" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="consultation" />
         <input type="text" name="name" placeholder="Your Name" required />
         <input type="email" name="email" placeholder="Your Email" required />
         <input type="text" name="topic" placeholder="Consultation Topic" required />
