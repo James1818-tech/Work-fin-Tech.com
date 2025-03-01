@@ -1,45 +1,80 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMapMarkerAlt, faPhone, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from "react";
 import "../styles/Contact.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope, faPhone, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 
-const ContactPage = () => {
+const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
   return (
-    <div className="contact-container">
+    <section className="contact-container">
       <h2>Contact Us</h2>
+
+      {/* Contact Information */}
       <div className="contact-info">
         <p>
-          <FontAwesomeIcon icon={faMapMarkerAlt} /> 39, Uselu-Lagos Road, Benin City, Edo State
+          <FontAwesomeIcon icon={faEnvelope} /> 
+          <strong> Email:</strong> info@workfintech.com
         </p>
         <p>
-          <FontAwesomeIcon icon={faPhone} /> 08139233396, 07067399959
+          <FontAwesomeIcon icon={faPhone} /> 
+          <strong> Phone:</strong> +234 812 345 6789
         </p>
         <p>
-          <FontAwesomeIcon icon={faEnvelope} /> workfintech1@gmail.com
+          <FontAwesomeIcon icon={faMapMarkerAlt} /> 
+          <strong> Address:</strong> 123 Tech Street, Lagos, Nigeria
         </p>
       </div>
 
-      {/* Contact Form */}
-      <form className="contact-form" name="contact" method="POST" data-netlify="true">
+      {/* Netlify Form */}
+      <form 
+        name="contact" 
+        method="POST" 
+        data-netlify="true"
+        className="contact-form"
+      >
         <input type="hidden" name="form-name" value="contact" />
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <textarea name="message" placeholder="Your Message" required></textarea>
-        <button type="submit">Send Message</button>
+        <div className="input-group">
+          <input 
+            type="text" 
+            name="name" 
+            placeholder="Your Name" 
+            value={formData.name} 
+            onChange={handleChange} 
+            required 
+          />
+        </div>
+        <div className="input-group">
+          <input 
+            type="email" 
+            name="email" 
+            placeholder="Your Email" 
+            value={formData.email} 
+            onChange={handleChange} 
+            required 
+          />
+        </div>
+        <div className="input-group">
+          <textarea 
+            name="message" 
+            placeholder="Your Message" 
+            value={formData.message} 
+            onChange={handleChange} 
+            required 
+          />
+        </div>
+        <button type="submit" className="submit-btn">Send Message</button>
       </form>
-
-      {/* Consultation Form */}
-      <h3>Schedule a Consultation</h3>
-      <form className="consultation-form" name="consultation" method="POST" data-netlify="true">
-        <input type="hidden" name="form-name" value="consultation" />
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <input type="text" name="topic" placeholder="Consultation Topic" required />
-        <input type="datetime-local" name="date" required />
-        <button type="submit">Book Consultation</button>
-      </form>
-    </div>
+    </section>
   );
 };
 
-export default ContactPage;
+export default Contact;
